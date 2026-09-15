@@ -1259,6 +1259,214 @@
         animation: ornament-glow 5s ease-in-out 1s infinite;
       }
 
+      .rsvp-section {
+        min-height: max(100%, 850px);
+        padding: 8% 6.5% 10%;
+        background: #f7f4eb;
+        color: #4c4b45;
+      }
+
+      .rsvp-flowers {
+        position: absolute;
+        top: 288px;
+        right: -36px;
+        z-index: 3;
+        display: block;
+        width: 218px;
+        height: auto;
+        pointer-events: none;
+        transform-origin: 82% 30%;
+        filter: drop-shadow(0 7px 10px rgba(73, 57, 46, 0.1));
+      }
+
+      .rsvp-kicker {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        color: rgba(103, 101, 91, 0.14);
+        font-size: 3.5rem;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .rsvp-title {
+        position: relative;
+        z-index: 2;
+        margin: -1.35rem 0 0;
+        color: #45443f;
+        font-size: 2rem;
+        line-height: 1;
+      }
+
+      .rsvp-copy {
+        position: relative;
+        z-index: 2;
+        max-width: 31rem;
+        margin: 2.7rem auto 2.4rem;
+        color: #64625a;
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 1.12rem;
+        line-height: 1.55;
+        text-transform: uppercase;
+      }
+
+      .rsvp-form {
+        position: relative;
+        z-index: 2;
+        gap: 1.8rem;
+      }
+
+      .rsvp-field,
+      .rsvp-attendance {
+        gap: 0.72rem;
+      }
+
+      .rsvp-field > span,
+      .rsvp-attendance legend {
+        color: #55544e;
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 1.15rem;
+        line-height: 1.25;
+        text-transform: uppercase;
+      }
+
+      .rsvp-field input {
+        min-height: 88px;
+        padding: 1rem 8.2rem 1rem 1.7rem;
+        border: 1.5px solid #7f7e73;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.26);
+        box-shadow: 0 2px 5px rgba(52, 51, 45, 0.05);
+        font-size: 1.15rem;
+      }
+
+      .rsvp-options {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.72rem;
+        overflow: visible;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+      }
+
+      .rsvp-option + .rsvp-option {
+        border-left: 0;
+      }
+
+      .rsvp-option span {
+        position: relative;
+        display: flex;
+        min-height: 44px;
+        padding: 0.24rem 0 0.24rem 3.35rem;
+        align-items: center;
+        justify-content: flex-start;
+        color: #55544e;
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 1.12rem;
+        line-height: 1.25;
+        text-align: left;
+        text-transform: uppercase;
+      }
+
+      .rsvp-option span::before {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 36px;
+        height: 36px;
+        border: 2px solid #89887e;
+        border-radius: 50%;
+        content: "";
+        transform: translateY(-50%);
+        transition:
+          border-color 180ms ease,
+          background-color 180ms ease,
+          box-shadow 180ms ease,
+          transform 180ms ease;
+      }
+
+      .rsvp-option input:checked + span {
+        background: transparent;
+        color: #552236;
+      }
+
+      .rsvp-option input:checked + span::before {
+        border-color: #68263f;
+        background: #68263f;
+        box-shadow: inset 0 0 0 8px #f7f4eb;
+        transform: translateY(-50%) scale(1.06);
+      }
+
+      .rsvp-option input:focus-visible + span {
+        box-shadow: none;
+      }
+
+      .rsvp-option input:focus-visible + span::before {
+        outline: 2px solid #8a713e;
+        outline-offset: 3px;
+      }
+
+      .rsvp-submit {
+        width: 58%;
+        min-height: 72px;
+        margin: 0.6rem auto 0;
+        border: 0;
+        border-radius: 0;
+        background: #68263f;
+        box-shadow: 0 10px 24px rgba(76, 28, 47, 0.2);
+        font-size: 1.22rem;
+      }
+
+      .rsvp-submit:hover {
+        background: #592035;
+      }
+
+      .motion-ready .rsvp-section .rsvp-kicker,
+      .motion-ready .rsvp-section .rsvp-title,
+      .motion-ready .rsvp-section .rsvp-copy,
+      .motion-ready .rsvp-section .rsvp-field,
+      .motion-ready .rsvp-section .rsvp-attendance,
+      .motion-ready .rsvp-section .rsvp-submit,
+      .motion-ready .rsvp-section .rsvp-flowers {
+        opacity: 0;
+      }
+
+      .rsvp-section.is-visible .rsvp-kicker,
+      .rsvp-section.is-visible .rsvp-title,
+      .rsvp-section.is-visible .rsvp-copy,
+      .rsvp-section.is-visible .rsvp-field,
+      .rsvp-section.is-visible .rsvp-attendance,
+      .rsvp-section.is-visible .rsvp-submit {
+        animation: survey-copy-in 0.9s cubic-bezier(0.2, 0.76, 0.2, 1) both;
+      }
+
+      .rsvp-section.is-visible .rsvp-title {
+        animation-delay: 90ms;
+      }
+
+      .rsvp-section.is-visible .rsvp-copy {
+        animation-delay: 180ms;
+      }
+
+      .rsvp-section.is-visible .rsvp-field {
+        animation-delay: 280ms;
+      }
+
+      .rsvp-section.is-visible .rsvp-attendance {
+        animation-delay: 390ms;
+      }
+
+      .rsvp-section.is-visible .rsvp-submit {
+        animation-delay: 520ms;
+      }
+
+      .rsvp-section.is-visible .rsvp-flowers {
+        animation:
+          survey-flower-in 1.15s cubic-bezier(0.18, 0.85, 0.3, 1.08) 250ms both,
+          survey-flower-float 5s ease-in-out 1.4s infinite;
+      }
+
       .music-toggle {
         position: absolute;
         top: max(14px, env(safe-area-inset-top));
@@ -1370,6 +1578,41 @@
         70%,
         100% {
           box-shadow: 0 0 0 15px rgba(244, 222, 142, 0);
+        }
+      }
+
+      @keyframes survey-copy-in {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes survey-flower-in {
+        from {
+          opacity: 0;
+          transform: translate3d(34px, 18px, 0) rotate(4deg) scale(0.94);
+        }
+
+        to {
+          opacity: 1;
+          transform: translate3d(0, 0, 0) rotate(0) scale(1);
+        }
+      }
+
+      @keyframes survey-flower-float {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) rotate(-0.8deg);
+        }
+
+        50% {
+          transform: translate3d(-3px, -8px, 0) rotate(1.2deg);
         }
       }
 
@@ -1796,13 +2039,15 @@
         </section>
 
         <section class="rsvp-section reveal" aria-labelledby="rsvp-title">
-          <div class="rsvp-ornament" aria-hidden="true">
-            <img src="assets/floral-ornament-transparent.png" alt="" />
-          </div>
+          <img class="rsvp-flowers" src="assets/rsvp-flowers.png" alt="" aria-hidden="true" />
 
-          <p class="rsvp-kicker">Қатысуыңызды растаңыз</p>
-          <h2 class="rsvp-title" id="rsvp-title">Тойға келесіз бе?</h2>
-          <p class="rsvp-copy">Жауабыңызды төменде қалдырыңыз</p>
+          <p class="rsvp-kicker" aria-hidden="true">Сауалнама</p>
+          <h2 class="rsvp-title" id="rsvp-title">Сауалнама</h2>
+          <p class="rsvp-copy">
+            Сіздің жауабыңыз тойды<br />
+            ұйымдастыруға көмегін тигізеді,<br />
+            алдын ала рақмет
+          </p>
 
           <form
             class="rsvp-form"
@@ -1818,41 +2063,29 @@
             </p>
 
             <label class="rsvp-field">
-              <span>Аты-жөніңіз</span>
+              <span>Есіміңіз</span>
               <input type="text" name="name" autocomplete="name" required />
             </label>
 
             <fieldset class="rsvp-attendance">
-              <legend>Қатысуыңыз</legend>
+              <legend>Тойға келе аласыз ба?</legend>
               <div class="rsvp-options">
                 <label class="rsvp-option">
-                  <input type="radio" name="attendance" value="Иә, келемін" required />
-                  <span>Иә, келемін</span>
+                  <input type="radio" name="attendance" value="Иә, әрине" required />
+                  <span>Иә, әрине</span>
                 </label>
                 <label class="rsvp-option">
-                  <input type="radio" name="attendance" value="Келе алмаймын" required />
-                  <span>Келе алмаймын</span>
+                  <input type="radio" name="attendance" value="Жұбайыммен келемін" required />
+                  <span>Жұбайыммен келемін</span>
+                </label>
+                <label class="rsvp-option">
+                  <input type="radio" name="attendance" value="Өкінішке орай, келе алмаймын" required />
+                  <span>Өкінішке орай, келе алмаймын</span>
                 </label>
               </div>
             </fieldset>
 
-            <label class="rsvp-field rsvp-guests-field">
-              <span>Қонақтар саны</span>
-              <select name="guests" required>
-                <option value="" selected disabled>Санды таңдаңыз</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4 немесе одан көп">4 немесе одан көп</option>
-              </select>
-            </label>
-
-            <label class="rsvp-field">
-              <span>Тілек немесе ескерту</span>
-              <textarea name="message" placeholder="Қалауыңыз бойынша"></textarea>
-            </label>
-
-            <button class="rsvp-submit" type="submit">Жауапты жіберу</button>
+            <button class="rsvp-submit" type="submit">Жіберу</button>
             <p class="rsvp-status" role="status" aria-live="polite"></p>
           </form>
         </section>
@@ -1881,21 +2114,8 @@
       const rsvpForm = document.querySelector(".rsvp-form");
       const rsvpStatus = document.querySelector(".rsvp-status");
       const rsvpSubmit = document.querySelector(".rsvp-submit");
-      const attendanceInputs = document.querySelectorAll('input[name="attendance"]');
-      const guestsField = document.querySelector(".rsvp-guests-field");
-      const guestsSelect = guestsField.querySelector("select");
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       let musicFadeFrame;
-
-      const syncGuestsField = () => {
-        const attendance = document.querySelector('input[name="attendance"]:checked');
-        const cannotAttend = attendance?.value === "Келе алмаймын";
-
-        guestsField.classList.toggle("is-disabled", cannotAttend);
-        guestsSelect.disabled = cannotAttend;
-        guestsSelect.required = !cannotAttend;
-        if (cannotAttend) guestsSelect.value = "";
-      };
 
       const updateMusicControl = () => {
         const isPlaying = !music.paused;
@@ -1987,8 +2207,6 @@
       music.addEventListener("play", updateMusicControl);
       music.addEventListener("pause", updateMusicControl);
 
-      attendanceInputs.forEach((input) => input.addEventListener("change", syncGuestsField));
-
       rsvpForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         rsvpSubmit.disabled = true;
@@ -2006,14 +2224,13 @@
           if (!response.ok) throw new Error("Form submission failed");
 
           rsvpForm.reset();
-          syncGuestsField();
           rsvpStatus.textContent = "Рақмет! Жауабыңыз қабылданды.";
         } catch (error) {
           rsvpStatus.classList.add("is-error");
           rsvpStatus.textContent = "Жауап жіберілмеді. Интернетті тексеріп, қайталап көріңіз.";
         } finally {
           rsvpSubmit.disabled = false;
-          rsvpSubmit.textContent = "Жауапты жіберу";
+          rsvpSubmit.textContent = "Жіберу";
         }
       });
 
