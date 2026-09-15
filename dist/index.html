@@ -1015,6 +1015,250 @@
         outline-offset: 4px;
       }
 
+      .rsvp-section {
+        position: relative;
+        width: 100%;
+        min-height: 100%;
+        padding: 10% 7% 12%;
+        overflow: hidden;
+        border-top: 1px solid rgba(96, 117, 72, 0.24);
+        background: #f5f2e9;
+        color: #46463f;
+        text-align: center;
+        color-scheme: light;
+      }
+
+      .rsvp-ornament {
+        width: 82%;
+        height: 76px;
+        margin: 0 auto 1.4rem;
+        overflow: hidden;
+        opacity: 0.3;
+      }
+
+      .rsvp-ornament img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: sepia(0.25) hue-rotate(28deg) saturate(0.7);
+      }
+
+      .rsvp-kicker {
+        margin: 0;
+        color: #607548;
+        font-family: "Snell Roundhand", "Apple Chancery", "URW Chancery L", cursive;
+        font-size: 2.15rem;
+        font-style: italic;
+        font-weight: 400;
+        line-height: 1.12;
+      }
+
+      .rsvp-title {
+        margin: 0.8rem 0 0;
+        color: #42443b;
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 1.55rem;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+
+      .rsvp-copy {
+        max-width: 26rem;
+        margin: 0.9rem auto 2rem;
+        color: #747269;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+
+      .rsvp-form {
+        display: grid;
+        width: 100%;
+        gap: 1.25rem;
+        margin: 0 auto;
+        text-align: left;
+      }
+
+      .rsvp-field,
+      .rsvp-attendance {
+        display: grid;
+        min-width: 0;
+        gap: 0.55rem;
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      .rsvp-field > span,
+      .rsvp-attendance legend {
+        padding: 0;
+        color: #52534a;
+        font-size: 1rem;
+        line-height: 1.35;
+      }
+
+      .rsvp-field input,
+      .rsvp-field select,
+      .rsvp-field textarea {
+        width: 100%;
+        min-height: 48px;
+        padding: 0.78rem 0.9rem;
+        border: 1px solid #c9cab8;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.58);
+        box-shadow: inset 0 1px 2px rgba(67, 68, 51, 0.05);
+        color: #3f4039;
+        font: inherit;
+        font-size: 1rem;
+        line-height: 1.35;
+        outline: none;
+        transition:
+          border-color 180ms ease,
+          box-shadow 180ms ease,
+          opacity 180ms ease;
+      }
+
+      .rsvp-field textarea {
+        min-height: 104px;
+        resize: vertical;
+      }
+
+      .rsvp-field input:focus,
+      .rsvp-field select:focus,
+      .rsvp-field textarea:focus {
+        border-color: #607548;
+        box-shadow: 0 0 0 3px rgba(96, 117, 72, 0.14);
+      }
+
+      .rsvp-field.is-disabled {
+        opacity: 0.44;
+      }
+
+      .rsvp-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        overflow: hidden;
+        border: 1px solid #aeb49b;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.45);
+      }
+
+      .rsvp-option {
+        position: relative;
+        min-width: 0;
+        cursor: pointer;
+      }
+
+      .rsvp-option + .rsvp-option {
+        border-left: 1px solid #aeb49b;
+      }
+
+      .rsvp-option input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .rsvp-option span {
+        display: grid;
+        min-height: 58px;
+        padding: 0.7rem 0.55rem;
+        place-items: center;
+        color: #54564d;
+        font-size: 0.94rem;
+        line-height: 1.2;
+        text-align: center;
+        transition:
+          background-color 180ms ease,
+          color 180ms ease;
+      }
+
+      .rsvp-option input:checked + span {
+        background: #607548;
+        color: #fffdf5;
+      }
+
+      .rsvp-option input:focus-visible + span {
+        box-shadow: inset 0 0 0 3px #d9c979;
+      }
+
+      .rsvp-submit {
+        min-height: 52px;
+        padding: 0.85rem 1.25rem;
+        border: 1px solid #52653d;
+        border-radius: 4px;
+        background: #607548;
+        box-shadow: 0 9px 22px rgba(63, 78, 47, 0.2);
+        color: #fffdf5;
+        cursor: pointer;
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 1rem;
+        letter-spacing: 0;
+        text-transform: uppercase;
+        transition:
+          background-color 180ms ease,
+          transform 180ms ease,
+          opacity 180ms ease;
+      }
+
+      .rsvp-submit:hover {
+        background: #52663d;
+        transform: translateY(-2px);
+      }
+
+      .rsvp-submit:focus-visible {
+        outline: 2px solid #8a713e;
+        outline-offset: 3px;
+      }
+
+      .rsvp-submit:disabled {
+        cursor: wait;
+        opacity: 0.62;
+        transform: none;
+      }
+
+      .rsvp-status {
+        min-height: 1.5em;
+        margin: -0.25rem 0 0;
+        color: #607548;
+        font-size: 1rem;
+        line-height: 1.5;
+        text-align: center;
+      }
+
+      .rsvp-status.is-error {
+        color: #8a3f3f;
+      }
+
+      .rsvp-honeypot {
+        position: absolute;
+        left: -10000px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+
+      .motion-ready .rsvp-section.reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 1s ease,
+          transform 1.15s cubic-bezier(0.2, 0.76, 0.2, 1);
+      }
+
+      .motion-ready .rsvp-section.reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .rsvp-section.is-visible .rsvp-ornament img {
+        animation: ornament-glow 5s ease-in-out 1s infinite;
+      }
+
       .music-toggle {
         position: absolute;
         top: max(14px, env(safe-area-inset-top));
@@ -1550,6 +1794,68 @@
             aria-label="Открыть Altyn Ballroom в 2GIS"
           >2GIS-те ашу</a>
         </section>
+
+        <section class="rsvp-section reveal" aria-labelledby="rsvp-title">
+          <div class="rsvp-ornament" aria-hidden="true">
+            <img src="assets/floral-ornament-transparent.png" alt="" />
+          </div>
+
+          <p class="rsvp-kicker">Қатысуыңызды растаңыз</p>
+          <h2 class="rsvp-title" id="rsvp-title">Тойға келесіз бе?</h2>
+          <p class="rsvp-copy">Жауабыңызды төменде қалдырыңыз</p>
+
+          <form
+            class="rsvp-form"
+            name="wedding-rsvp"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+          >
+            <input type="hidden" name="form-name" value="wedding-rsvp" />
+
+            <p class="rsvp-honeypot" aria-hidden="true">
+              <label>Бұл жолды толтырмаңыз <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+            </p>
+
+            <label class="rsvp-field">
+              <span>Аты-жөніңіз</span>
+              <input type="text" name="name" autocomplete="name" required />
+            </label>
+
+            <fieldset class="rsvp-attendance">
+              <legend>Қатысуыңыз</legend>
+              <div class="rsvp-options">
+                <label class="rsvp-option">
+                  <input type="radio" name="attendance" value="Иә, келемін" required />
+                  <span>Иә, келемін</span>
+                </label>
+                <label class="rsvp-option">
+                  <input type="radio" name="attendance" value="Келе алмаймын" required />
+                  <span>Келе алмаймын</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <label class="rsvp-field rsvp-guests-field">
+              <span>Қонақтар саны</span>
+              <select name="guests" required>
+                <option value="" selected disabled>Санды таңдаңыз</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4 немесе одан көп">4 немесе одан көп</option>
+              </select>
+            </label>
+
+            <label class="rsvp-field">
+              <span>Тілек немесе ескерту</span>
+              <textarea name="message" placeholder="Қалауыңыз бойынша"></textarea>
+            </label>
+
+            <button class="rsvp-submit" type="submit">Жауапты жіберу</button>
+            <p class="rsvp-status" role="status" aria-live="polite"></p>
+          </form>
+        </section>
       </section>
 
       <button
@@ -1572,8 +1878,24 @@
       const revealItems = document.querySelectorAll(".reveal");
       const music = document.querySelector("#wedding-music");
       const musicToggle = document.querySelector(".music-toggle");
+      const rsvpForm = document.querySelector(".rsvp-form");
+      const rsvpStatus = document.querySelector(".rsvp-status");
+      const rsvpSubmit = document.querySelector(".rsvp-submit");
+      const attendanceInputs = document.querySelectorAll('input[name="attendance"]');
+      const guestsField = document.querySelector(".rsvp-guests-field");
+      const guestsSelect = guestsField.querySelector("select");
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       let musicFadeFrame;
+
+      const syncGuestsField = () => {
+        const attendance = document.querySelector('input[name="attendance"]:checked');
+        const cannotAttend = attendance?.value === "Келе алмаймын";
+
+        guestsField.classList.toggle("is-disabled", cannotAttend);
+        guestsSelect.disabled = cannotAttend;
+        guestsSelect.required = !cannotAttend;
+        if (cannotAttend) guestsSelect.value = "";
+      };
 
       const updateMusicControl = () => {
         const isPlaying = !music.paused;
@@ -1664,6 +1986,36 @@
 
       music.addEventListener("play", updateMusicControl);
       music.addEventListener("pause", updateMusicControl);
+
+      attendanceInputs.forEach((input) => input.addEventListener("change", syncGuestsField));
+
+      rsvpForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        rsvpSubmit.disabled = true;
+        rsvpSubmit.textContent = "Жіберілуде...";
+        rsvpStatus.classList.remove("is-error");
+        rsvpStatus.textContent = "";
+
+        try {
+          const response = await fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(new FormData(rsvpForm)).toString(),
+          });
+
+          if (!response.ok) throw new Error("Form submission failed");
+
+          rsvpForm.reset();
+          syncGuestsField();
+          rsvpStatus.textContent = "Рақмет! Жауабыңыз қабылданды.";
+        } catch (error) {
+          rsvpStatus.classList.add("is-error");
+          rsvpStatus.textContent = "Жауап жіберілмеді. Интернетті тексеріп, қайталап көріңіз.";
+        } finally {
+          rsvpSubmit.disabled = false;
+          rsvpSubmit.textContent = "Жауапты жіберу";
+        }
+      });
 
     </script>
   </body>
