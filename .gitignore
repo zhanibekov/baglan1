@@ -1,0 +1,10 @@
+.DS_Store
+*.textClipping
+*.zip
+outputs/
+work/
+dist/assets/*-reference.png
+dist/assets/couple-invitation.png
+dist/assets/hosts-manan-laura.png
+dist/assets/hosts-manap-laura.png
+dist/assets/hummingbird-hd.png

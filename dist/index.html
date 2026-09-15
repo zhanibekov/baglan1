@@ -2,30 +2,22 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>B & A Invitation</title>
-    <meta
-      name="description"
-      content="Приглашение B и A с анимированным раскрытием конверта."
-    />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23242217'/%3E%3Cellipse cx='32' cy='32' rx='22' ry='25' fill='none' stroke='%23d9bd70' stroke-width='3'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Georgia,serif' font-size='22' font-style='italic' fill='%23f4dda0'%3EBA%3C/text%3E%3C/svg%3E"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#252616" />
+    <title>B &amp; A</title>
+    <meta name="description" content="Приглашение B и A в анимированном конверте." />
     <style>
       :root {
         color-scheme: dark;
-        --velvet: #222115;
-        --velvet-2: #33341f;
-        --shadow: rgba(8, 8, 5, 0.6);
-        --paper: #c7c5a0;
-        --paper-light: #d8d5ad;
-        --paper-deep: #a7a47e;
-        --line: rgba(54, 54, 35, 0.5);
-        --gold: #f5d983;
-        --gold-deep: #b88d37;
-        --ink: #3d3c28;
+        --paper-top: #d6d6b0;
+        --paper: #c9c9a3;
+        --paper-shadow: #aaa985;
+        --olive: #292a18;
+        --olive-deep: #16170d;
+        --ink: rgba(63, 63, 42, 0.62);
+        --gold-pale: #fff1ad;
+        --gold: #e8c65d;
+        --gold-deep: #987526;
       }
 
       * {
@@ -34,396 +26,1361 @@
 
       html,
       body {
+        width: 100%;
         min-height: 100%;
       }
 
       body {
         margin: 0;
-        overflow-x: hidden;
-        background:
-          radial-gradient(circle at 50% 0%, rgba(235, 226, 156, 0.2), transparent 30rem),
-          radial-gradient(circle at 20% 85%, rgba(13, 12, 7, 0.55), transparent 28rem),
-          linear-gradient(145deg, #17170f 0%, var(--velvet-2) 48%, #15150d 100%);
-        color: #fbf5dd;
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        overflow: hidden;
+        background: var(--olive-deep);
+        font-family: Georgia, "Times New Roman", serif;
       }
 
-      .stage {
+      button {
+        font: inherit;
+      }
+
+      .scene {
         position: relative;
-        display: grid;
-        min-height: 100svh;
-        place-items: center;
-        padding: clamp(18px, 5vw, 56px);
+        width: 100%;
+        height: 100svh;
+        min-height: 560px;
+        overflow: hidden;
         isolation: isolate;
+        background:
+          radial-gradient(ellipse at 50% 45%, rgba(110, 104, 57, 0.48), transparent 44%),
+          linear-gradient(180deg, #33351f 0%, #292a18 58%, #17180e 100%);
       }
 
-      .stage::before {
+      .scene::after,
+      .paper-face::after {
         position: absolute;
         inset: 0;
-        z-index: -2;
         content: "";
-        opacity: 0.42;
-        background-image:
-          linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
-        background-size: 42px 42px;
-        mask-image: radial-gradient(circle at 50% 45%, black, transparent 76%);
-      }
-
-      .stage::after {
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        content: "";
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.26'/%3E%3C/svg%3E");
-        mix-blend-mode: soft-light;
-        opacity: 0.5;
         pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E");
+        mix-blend-mode: soft-light;
+        opacity: 0.7;
       }
 
-      .invitation {
-        width: min(100%, 430px);
-        text-align: center;
-      }
-
-      .envelope-button {
-        position: relative;
-        display: block;
-        width: min(88vw, 390px);
-        aspect-ratio: 0.68;
-        margin: 0 auto;
+      .envelope-trigger {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
         padding: 0;
         border: 0;
-        border-radius: 0 0 30px 30px;
+        color: inherit;
         background: transparent;
         cursor: pointer;
-        perspective: 1200px;
+        perspective: 1500px;
+        opacity: 1;
+        transition: opacity 0.46s ease, visibility 0s linear 0s;
         -webkit-tap-highlight-color: transparent;
       }
 
-      .envelope-button:focus-visible {
+      .envelope-trigger:focus-visible {
         outline: 2px solid var(--gold);
-        outline-offset: 8px;
+        outline-offset: -8px;
       }
 
-      .envelope {
+      .envelope-base {
         position: absolute;
-        inset: 7% 0 10%;
-        filter: drop-shadow(0 38px 28px var(--shadow));
-      }
-
-      .pocket,
-      .letter,
-      .flap {
-        position: absolute;
-        left: 0;
+        inset: 0;
+        z-index: 1;
+        display: block;
         width: 100%;
-      }
-
-      .pocket {
-        bottom: 0;
-        height: 63%;
-        overflow: hidden;
-        border-radius: 0 0 30px 30px;
-        background:
-          linear-gradient(145deg, rgba(255, 255, 255, 0.22), transparent 38%),
-          linear-gradient(35deg, transparent 49.5%, rgba(87, 85, 56, 0.42) 50%, transparent 50.8%),
-          linear-gradient(-35deg, transparent 49.5%, rgba(87, 85, 56, 0.42) 50%, transparent 50.8%),
-          linear-gradient(180deg, var(--paper-light), var(--paper) 55%, var(--paper-deep));
-        box-shadow: inset 0 -18px 36px rgba(50, 48, 28, 0.18);
-      }
-
-      .pocket::before,
-      .pocket::after {
-        position: absolute;
-        bottom: -1px;
-        width: 52%;
         height: 100%;
-        content: "";
-        background: linear-gradient(180deg, rgba(225, 222, 178, 0.88), rgba(164, 161, 122, 0.95));
+        object-fit: fill;
+        transition:
+          filter 1.2s ease,
+          transform 1.35s cubic-bezier(0.2, 0.76, 0.2, 1);
       }
 
-      .pocket::before {
-        left: 0;
+      .back-pocket {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        overflow: hidden;
+      }
+
+      .back-pocket::before,
+      .back-pocket::after {
+        position: absolute;
+        bottom: -2%;
+        width: 60%;
+        height: 44%;
+        content: "";
+        background: linear-gradient(180deg, rgba(68, 69, 38, 0.8), rgba(28, 29, 16, 0.98));
+        box-shadow: inset 0 18px 34px rgba(5, 6, 2, 0.26);
+      }
+
+      .back-pocket::before {
+        left: -10%;
         clip-path: polygon(0 0, 100% 100%, 0 100%);
       }
 
-      .pocket::after {
-        right: 0;
+      .back-pocket::after {
+        right: -10%;
         clip-path: polygon(100% 0, 100% 100%, 0 100%);
       }
 
-      .letter {
-        right: 6%;
-        bottom: 18%;
-        left: 6%;
-        width: 88%;
-        height: 64%;
-        padding: 34px 25px 28px;
-        border: 1px solid rgba(98, 94, 55, 0.3);
-        border-radius: 24px;
-        background:
-          linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent 28%),
-          repeating-linear-gradient(90deg, rgba(84, 83, 52, 0.035) 0 1px, transparent 1px 7px),
-          linear-gradient(150deg, #eeebc4, #cfcba0);
-        box-shadow: 0 22px 34px rgba(14, 13, 8, 0.28);
-        opacity: 0;
-        transform: translateY(34%) scale(0.96);
-        transition: transform 1100ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 650ms ease;
-      }
-
-      .letter-text {
-        display: grid;
-        height: 100%;
-        align-content: center;
-        gap: 12px;
-        color: var(--ink);
-      }
-
-      .letter-text .date {
-        font-size: 0.78rem;
-        line-height: 1.2;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-      }
-
-      .letter-text h1 {
-        margin: 0;
-        font-family: Georgia, "Times New Roman", serif;
-        font-size: clamp(2.4rem, 14vw, 4.6rem);
-        font-style: italic;
-        font-weight: 400;
-        line-height: 0.92;
-        color: var(--gold-deep);
-        text-shadow: 0 1px 0 #fff4bf, 0 10px 14px rgba(78, 58, 20, 0.18);
-      }
-
-      .letter-text p {
-        max-width: 20ch;
-        margin: 0 auto;
-        font-size: 1rem;
-        line-height: 1.55;
-      }
-
       .flap {
-        top: 0;
-        height: 58%;
-        transform-origin: 50% 100%;
-        transform-style: preserve-3d;
-        transition: transform 1150ms cubic-bezier(0.2, 0.75, 0.15, 1);
+        position: absolute;
+        z-index: 4;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        transform: translate3d(0, 0, 0);
+        transition: transform 1.32s cubic-bezier(0.2, 0.76, 0.2, 1);
+        will-change: transform;
       }
 
-      .flap-face {
+      .flap-art {
         position: absolute;
         inset: 0;
-        display: grid;
-        place-items: center;
-        border-radius: 28px 28px 34px 34px;
-        background:
-          linear-gradient(160deg, rgba(255, 255, 255, 0.3), transparent 42%),
-          linear-gradient(180deg, #d4d2ae, #b9b68f);
-        clip-path: polygon(0 0, 100% 0, 100% 48%, 50% 100%, 0 48%);
-        backface-visibility: hidden;
-        box-shadow: inset 0 -16px 28px rgba(67, 66, 43, 0.16);
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+        filter: drop-shadow(0 18px 14px rgba(5, 6, 2, 0.36));
       }
 
-      .flap-face.back {
-        background: linear-gradient(180deg, #b5b18a, #d6d2a8);
+      .paper-face {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        border-radius: 0 0 12% 12%;
+        background:
+          radial-gradient(ellipse at 48% 34%, rgba(255, 255, 224, 0.28), transparent 36%),
+          linear-gradient(180deg, var(--paper-top) 0%, var(--paper) 72%, var(--paper-shadow) 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 74%, 55% 98%, 50% 100%, 45% 98%, 0 74%);
+        backface-visibility: hidden;
+        filter: drop-shadow(0 22px 12px rgba(6, 7, 3, 0.42));
+      }
+
+      .paper-face.back {
+        background: linear-gradient(180deg, #a7a57e, #d0cfaa);
         transform: rotateX(180deg);
       }
 
       .seal {
-        position: relative;
-        display: grid;
-        width: 60%;
-        aspect-ratio: 0.78;
-        place-items: center;
-        margin-top: 2%;
-        border: 2px solid var(--line);
-        border-radius: 50%;
-      }
-
-      .seal::before,
-      .seal::after {
         position: absolute;
-        inset: 8px;
-        content: "";
+        top: 21%;
+        left: 50%;
+        width: min(59vw, 340px);
+        aspect-ratio: 0.73;
+        transform: translateX(-50%);
+      }
+
+      .oval,
+      .dots {
+        position: absolute;
         border-radius: 50%;
       }
 
-      .seal::before {
-        border: 1px solid rgba(62, 61, 39, 0.55);
+      .oval {
+        inset: 0;
+        border: 2px solid var(--ink);
       }
 
-      .seal::after {
-        border: 2px dotted rgba(62, 61, 39, 0.55);
-        transform: scale(1.09);
+      .oval::before {
+        position: absolute;
+        inset: 10px;
+        content: "";
+        border: 1px solid rgba(63, 63, 42, 0.55);
+        border-radius: inherit;
+      }
+
+      .dots {
+        inset: 5px;
+        border: 2px dotted rgba(63, 63, 42, 0.64);
       }
 
       .monogram {
-        position: relative;
-        z-index: 1;
-        display: grid;
-        width: 72%;
+        position: absolute;
+        top: 27%;
+        left: 33%;
+        width: 34%;
+        height: 28%;
         color: var(--gold);
-        font-family: Georgia, "Times New Roman", serif;
+        font-family: "Snell Roundhand", "Apple Chancery", "URW Chancery L", cursive;
         font-style: italic;
         font-weight: 400;
         line-height: 0.72;
         text-shadow:
-          0 1px 0 #fff6be,
-          0 4px 8px rgba(102, 70, 19, 0.4),
-          -1px 0 0 rgba(77, 74, 45, 0.28);
+          0 1px 0 var(--gold-pale),
+          1px 2px 1px var(--gold-deep),
+          0 5px 8px rgba(68, 50, 11, 0.26);
       }
 
-      .monogram span:first-child {
-        justify-self: start;
-        font-size: clamp(4.2rem, 19vw, 6.6rem);
-      }
-
-      .monogram span:last-child {
-        justify-self: end;
-        margin-top: -10px;
-        font-size: clamp(4rem, 18vw, 6.2rem);
-      }
-
-      .shine {
+      .initial {
         position: absolute;
-        inset: 0;
-        overflow: hidden;
-        clip-path: polygon(0 0, 100% 0, 100% 48%, 50% 100%, 0 48%);
-        pointer-events: none;
+        display: block;
       }
 
-      .shine::before {
+      .initial-b {
+        top: 2%;
+        left: 0;
+        font-size: clamp(4rem, 17vw, 6.7rem);
+        transform: rotate(-5deg);
+      }
+
+      .initial-a {
+        right: 0;
+        bottom: 2%;
+        font-size: clamp(4rem, 17vw, 6.7rem);
+        transform: rotate(3deg);
+      }
+
+      .tap-mark {
         position: absolute;
-        top: -30%;
-        left: -80%;
-        width: 42%;
-        height: 150%;
-        content: "";
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 222, 0.32), transparent);
-        transform: rotate(18deg);
-        animation: glint 4.8s 1.2s infinite;
-      }
-
-      .hint {
-        margin: clamp(18px, 4vw, 28px) 0 0;
-        color: rgba(251, 245, 221, 0.78);
-        font-size: 0.95rem;
-        line-height: 1.5;
-      }
-
-      .sparkles {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-      }
-
-      .sparkles i {
-        position: absolute;
-        width: 5px;
-        height: 5px;
+        z-index: 5;
+        right: max(18px, env(safe-area-inset-right));
+        bottom: max(18px, env(safe-area-inset-bottom));
+        width: 9px;
+        height: 9px;
         border-radius: 50%;
-        background: var(--gold);
-        box-shadow: 0 0 18px rgba(245, 217, 131, 0.7);
+        background: rgba(244, 222, 142, 0.75);
+        box-shadow: 0 0 0 0 rgba(244, 222, 142, 0.32);
+        animation: pulse 2.2s ease-out infinite;
+        transition: opacity 0.3s ease;
+      }
+
+      .envelope-trigger.is-open .flap {
+        transform: translate3d(0, -30.5%, 0) scale(0.995);
+      }
+
+      .envelope-trigger.is-open .envelope-base {
+        filter: brightness(1.06);
+        transform: scale(1.02);
+      }
+
+      .envelope-trigger.is-open .tap-mark {
         opacity: 0;
-        transform: translateY(18px) scale(0.3);
+        animation: none;
       }
 
-      .sparkles i:nth-child(1) {
-        top: 24%;
-        left: 18%;
+      .invitation-screen {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        display: block;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scroll-behavior: auto;
+        -webkit-overflow-scrolling: touch;
+        background: #f5f2e9;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: scale(1.025);
+        transition:
+          opacity 0.62s ease,
+          transform 0.8s cubic-bezier(0.2, 0.76, 0.2, 1),
+          visibility 0s linear 0.62s;
+        touch-action: pan-y;
       }
 
-      .sparkles i:nth-child(2) {
-        top: 16%;
-        right: 19%;
+      .visual-page {
+        display: contents;
       }
 
-      .sparkles i:nth-child(3) {
-        top: 46%;
-        left: 10%;
+      .photo-window {
+        position: relative;
+        flex: 0 0 auto;
+        width: 100%;
+        aspect-ratio: 600 / 957;
+        overflow: hidden;
+        background: #222315;
+        opacity: 0;
+        transform: scale(1.035);
+        transition:
+          opacity 1s ease 0.12s,
+          transform 1.35s cubic-bezier(0.18, 0.74, 0.22, 1) 0.12s;
       }
 
-      .sparkles i:nth-child(4) {
-        top: 43%;
-        right: 11%;
+      .photo-window::after {
+        position: absolute;
+        right: -2%;
+        bottom: -1px;
+        left: -2%;
+        z-index: 4;
+        height: 6.5%;
+        content: "";
+        background: #f5f2e9;
+        clip-path: polygon(0 42%, 8% 48%, 15% 34%, 23% 50%, 31% 36%, 40% 48%, 50% 32%, 60% 45%, 69% 38%, 78% 58%, 87% 37%, 94% 49%, 100% 38%, 100% 100%, 0 100%);
       }
 
-      .is-open .flap {
-        transform: rotateX(-178deg);
+      .couple-photo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: auto;
+        transform-origin: 50% 48%;
+        animation: photo-breathe 11s ease-in-out infinite alternate;
       }
 
-      .is-open .letter {
+      .opened-monogram {
+        position: absolute;
+        top: 15.2%;
+        left: 50%;
+        width: 25%;
+        height: 10%;
+        opacity: 0;
+        transform: translate(-50%, 18px) scale(0.88);
+        color: rgba(249, 248, 241, 0.94);
+        font-family: "Snell Roundhand", "Apple Chancery", "URW Chancery L", cursive;
+        font-size: clamp(3.2rem, 15vw, 6rem);
+        font-style: italic;
+        font-weight: 400;
+        line-height: 0.7;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.68);
+        transition:
+          opacity 0.9s ease 0.5s,
+          transform 1.15s cubic-bezier(0.18, 0.85, 0.3, 1.12) 0.5s;
+      }
+
+      .opened-monogram span {
+        position: absolute;
+      }
+
+      .opened-monogram span:first-child {
+        top: 0;
+        left: 8%;
+        transform: rotate(-8deg);
+      }
+
+      .opened-monogram span:last-child {
+        right: 14%;
+        bottom: -35%;
+        transform: rotate(8deg);
+      }
+
+      .swipe-dot {
+        position: absolute;
+        z-index: 2;
+        top: 77.5%;
+        left: 50%;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: rgba(245, 244, 236, 0.88);
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+        transform: translateX(-50%);
+        transform-origin: 50% 100%;
+        animation: dot-jump 1.45s ease-in-out infinite;
+        animation-delay: 1.05s;
+        opacity: 0;
+        transition: opacity 0.7s ease 0.9s;
+        will-change: transform;
+      }
+
+      .swipe-caption {
+        position: absolute;
+        z-index: 2;
+        top: 83.4%;
+        left: 50%;
+        width: 100%;
+        transform: translateX(-50%);
+        color: rgba(245, 242, 230, 0.9);
+        font-size: clamp(1rem, 4vw, 1.4rem);
+        line-height: 1.2;
+        text-align: center;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.48);
+        opacity: 0;
+        transform: translate(-50%, 10px);
+        transition:
+          opacity 0.75s ease 1s,
+          transform 0.9s cubic-bezier(0.2, 0.76, 0.2, 1) 1s;
+      }
+
+      .scene.invitation-visible .envelope-trigger {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.46s ease, visibility 0s linear 0.46s;
+      }
+
+      .scene.invitation-visible .invitation-screen {
         opacity: 1;
-        transform: translateY(-19%) scale(1);
-        transition-delay: 340ms;
+        visibility: visible;
+        pointer-events: auto;
+        transform: scale(1);
+        transition:
+          opacity 0.62s ease,
+          transform 0.8s cubic-bezier(0.2, 0.76, 0.2, 1),
+          visibility 0s linear 0s;
       }
 
-      .is-open .sparkles i {
-        animation: rise 1500ms ease-out forwards;
+      .scene.invitation-visible .photo-window {
+        opacity: 1;
+        transform: scale(1);
       }
 
-      .is-open .sparkles i:nth-child(2) {
+      .scene.invitation-visible .opened-monogram {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+      }
+
+      .scene.invitation-visible .swipe-dot,
+      .scene.invitation-visible .swipe-caption {
+        opacity: 1;
+      }
+
+      .scene.invitation-visible .swipe-caption {
+        transform: translate(-50%, 0);
+      }
+
+      .details-content {
+        position: relative;
+        z-index: 1;
+        display: block;
+        width: 100%;
+        min-height: 0;
+        aspect-ratio: 540 / 928;
+        overflow: hidden;
+        padding: 0;
+        background: #f5f2e9;
+        color: #48463f;
+        container-type: inline-size;
+        text-align: center;
+      }
+
+      .details-content::before {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        content: "";
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+        mix-blend-mode: multiply;
+        opacity: 0.17;
+        pointer-events: none;
+      }
+
+      .details-flourish {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 12.2%;
+        margin: 0;
+        overflow: hidden;
+        opacity: 0.34;
+      }
+
+      .details-flourish img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transform: none;
+        filter: grayscale(1) sepia(0.15);
+      }
+
+      .details-heading {
+        position: absolute;
+        top: 15.1%;
+        left: 0;
+        width: 100%;
+        height: 10.6%;
+        margin: 0;
+      }
+
+      .details-heading-script {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        margin: 0;
+        color: rgba(101, 95, 82, 0.16);
+        font-family: "Snell Roundhand", "Apple Chancery", "URW Chancery L", cursive;
+        font-size: 8.8cqw;
+        font-style: italic;
+        font-weight: 400;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .details-heading-main {
+        position: absolute;
+        top: 7.1cqw;
+        left: 0;
+        display: block;
+        width: 100%;
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 4.55cqw;
+        font-weight: 400;
+        letter-spacing: 0.055em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .details-audience {
+        position: absolute;
+        top: 28.5%;
+        left: 0;
+        display: block;
+        width: 100%;
+        margin: 0;
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 4.55cqw;
+        font-weight: 400;
+        letter-spacing: 0.045em;
+        line-height: 1.55;
+        text-transform: uppercase;
+      }
+
+      .details-lead {
+        position: absolute;
+        top: 52.9%;
+        left: 0;
+        display: block;
+        width: 100%;
+        margin: 0;
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 4.65cqw;
+        font-weight: 400;
+        letter-spacing: 0.075em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .couple-names {
+        position: absolute;
+        top: 59.2%;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        font-family: "Snell Roundhand", "Apple Chancery", "URW Chancery L", cursive;
+        font-size: 9.15cqw;
+        font-style: italic;
+        font-weight: 400;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .details-closing {
+        position: absolute;
+        top: 72.3%;
+        left: 0;
+        display: block;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 4.48cqw;
+        font-weight: 400;
+        letter-spacing: 0.055em;
+        line-height: 1.56;
+        text-transform: uppercase;
+      }
+
+      .motion-ready .details-content .reveal {
+        opacity: 0;
+        filter: blur(3px);
+        transform: translateY(22px);
+        transition:
+          opacity 0.9s ease var(--reveal-delay, 0ms),
+          filter 0.9s ease var(--reveal-delay, 0ms),
+          transform 1s cubic-bezier(0.2, 0.76, 0.2, 1) var(--reveal-delay, 0ms);
+        will-change: opacity, filter, transform;
+      }
+
+      .motion-ready .details-content .reveal.is-visible {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+      }
+
+      .motion-ready .details-content .details-flourish.reveal {
+        opacity: 0;
+        transform: translateY(12px) scale(0.96);
+      }
+
+      .motion-ready .details-content .details-flourish.reveal.is-visible {
+        opacity: 0.34;
+        transform: translateY(0) scale(1);
+      }
+
+      .details-flourish.is-visible img {
+        animation: ornament-glow 5s ease-in-out 1.2s infinite;
+      }
+
+      .details-heading.is-visible .details-heading-script {
+        animation: script-breathe 5.5s ease-in-out 1.1s infinite;
+      }
+
+      .hosts-section {
+        position: relative;
+        display: block;
+        width: 100%;
+        aspect-ratio: 970 / 1622;
+        margin: 0;
+        overflow: hidden;
+        background: #f5f2e9;
+        container-type: inline-size;
+      }
+
+      .hosts-background {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .hosts-script,
+      .hosts-title,
+      .hosts-names {
+        position: absolute;
+        left: 0;
+        z-index: 2;
+        width: 100%;
+        margin: 0;
+        color: #514f47;
+        text-align: center;
+      }
+
+      .hosts-script {
+        top: 35.1%;
+        color: rgba(110, 105, 93, 0.18);
+        font-family: "Snell Roundhand", "Apple Chancery", "URW Chancery L", cursive;
+        font-size: 9.2cqw;
+        font-style: italic;
+        font-weight: 400;
+        line-height: 1;
+      }
+
+      .hosts-title {
+        top: 39.7%;
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 5.65cqw;
+        font-weight: 400;
+        letter-spacing: 0.055em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .hosts-names {
+        top: 52.3%;
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 5.35cqw;
+        font-weight: 400;
+        letter-spacing: 0.055em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .hummingbird {
+        position: absolute;
+        z-index: 3;
+        top: 61.5%;
+        width: 27%;
+        aspect-ratio: 1455 / 1016;
+        animation: bird-hover 3.4s ease-in-out infinite;
+        will-change: transform;
+      }
+
+      .hummingbird-left {
+        left: 20%;
+      }
+
+      .hummingbird-right {
+        right: 20%;
+        animation-delay: -1.7s;
+      }
+
+      .bird-orient,
+      .hummingbird img {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .hummingbird-right .bird-orient {
+        filter: hue-rotate(42deg) saturate(0.92);
+        transform: scaleX(-1);
+      }
+
+      .hummingbird .bird-wings {
+        transform-origin: 48% 52%;
+        animation: wingbeat 0.16s ease-in-out infinite alternate;
+        will-change: transform, filter;
+      }
+
+      .hummingbird-right .bird-wings {
+        animation-delay: -0.08s;
+      }
+
+      .motion-ready .hosts-section.reveal {
+        opacity: 0;
+        clip-path: inset(6% 0 0 0);
+        transform: translateY(22px) scale(1.015);
+        transition:
+          opacity 1s ease,
+          clip-path 1.25s cubic-bezier(0.2, 0.76, 0.2, 1),
+          transform 1.25s cubic-bezier(0.2, 0.76, 0.2, 1);
+        will-change: opacity, clip-path, transform;
+      }
+
+      .motion-ready .hosts-section.reveal.is-visible {
+        opacity: 1;
+        clip-path: inset(0);
+        transform: translateY(0) scale(1);
+      }
+
+      .calendar-section {
+        position: relative;
+        display: block;
+        width: 100%;
+        aspect-ratio: 3 / 4;
+        margin: 0;
+        overflow: hidden;
+        background: #f7f4ec;
+        color: #504e47;
+        container-type: inline-size;
+      }
+
+      .calendar-background {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .calendar-script,
+      .calendar-title,
+      .calendar-date,
+      .calendar-weekdays,
+      .calendar-grid {
+        position: absolute;
+        left: 0;
+        z-index: 2;
+        width: 100%;
+        margin: 0;
+      }
+
+      .calendar-script {
+        top: 9.1%;
+        color: rgba(105, 100, 89, 0.18);
+        font-family: "Snell Roundhand", "Apple Chancery", "URW Chancery L", cursive;
+        font-size: 9.1cqw;
+        font-style: italic;
+        font-weight: 400;
+        line-height: 1;
+        text-align: center;
+      }
+
+      .calendar-title {
+        top: 15.5%;
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 5.7cqw;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 1;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .calendar-date {
+        top: 23.7%;
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 4.95cqw;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 1;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .calendar-time {
+        display: block;
+        margin-top: 1.4cqw;
+        font-size: 0.92em;
+      }
+
+      .calendar-weekdays {
+        top: 34.5%;
+        left: 6.5%;
+        display: grid;
+        width: 87%;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 4.25cqw;
+        font-weight: 400;
+        line-height: 1;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .calendar-grid {
+        top: 42.2%;
+        left: 6.5%;
+        display: grid;
+        width: 87%;
+        height: 43%;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        grid-template-rows: repeat(6, minmax(0, 1fr));
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 4.35cqw;
+        font-weight: 400;
+        line-height: 1;
+        text-align: center;
+      }
+
+      .calendar-day {
+        position: relative;
+        display: grid;
+        min-width: 0;
+        place-items: center;
+      }
+
+      .calendar-day > span:first-child {
+        position: relative;
+        z-index: 4;
+      }
+
+      .event-marker {
+        position: absolute;
+        top: 55%;
+        left: 52%;
+        z-index: 3;
+        width: 225%;
+        aspect-ratio: 1184 / 1255;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+      }
+
+      .event-marker img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        opacity: 0;
+      }
+
+      .motion-ready .calendar-section.reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 1s ease,
+          transform 1.15s cubic-bezier(0.2, 0.76, 0.2, 1);
+      }
+
+      .motion-ready .calendar-section.reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .motion-ready .calendar-section .calendar-script,
+      .motion-ready .calendar-section .calendar-title,
+      .motion-ready .calendar-section .calendar-date,
+      .motion-ready .calendar-section .calendar-weekdays,
+      .motion-ready .calendar-section .calendar-day {
+        opacity: 0;
+      }
+
+      .calendar-section.is-visible .calendar-script,
+      .calendar-section.is-visible .calendar-title,
+      .calendar-section.is-visible .calendar-date,
+      .calendar-section.is-visible .calendar-weekdays {
+        animation: calendar-copy-in 0.9s cubic-bezier(0.2, 0.76, 0.2, 1) both;
+      }
+
+      .calendar-section.is-visible .calendar-title {
+        animation-delay: 90ms;
+      }
+
+      .calendar-section.is-visible .calendar-date {
+        animation-delay: 180ms;
+      }
+
+      .calendar-section.is-visible .calendar-weekdays {
+        animation-delay: 280ms;
+      }
+
+      .calendar-section.is-visible .calendar-day {
+        animation: calendar-day-in 0.55s ease both;
+        animation-delay: calc(360ms + var(--day-index) * 24ms);
+      }
+
+      .calendar-section.is-visible .event-marker img {
+        animation:
+          marker-arrive 0.9s cubic-bezier(0.18, 0.85, 0.3, 1.16) 1.18s both,
+          marker-pulse 2.4s ease-in-out 2.08s infinite;
+      }
+
+      .location-section {
+        position: relative;
+        display: block;
+        width: 100%;
+        aspect-ratio: 3 / 4;
+        margin: 0;
+        overflow: hidden;
+        background: #090a07;
+        color: #f2eee8;
+        container-type: inline-size;
+      }
+
+      .location-background {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform-origin: 50% 55%;
+      }
+
+      .location-section::after {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        content: "";
+        background: rgba(0, 0, 0, 0.08);
+        pointer-events: none;
+      }
+
+      .location-script,
+      .location-title,
+      .location-address {
+        position: absolute;
+        left: 0;
+        z-index: 3;
+        width: 100%;
+        margin: 0;
+        text-align: center;
+      }
+
+      .location-script {
+        top: 8.2%;
+        color: rgba(237, 232, 224, 0.2);
+        font-family: "Snell Roundhand", "Apple Chancery", "URW Chancery L", cursive;
+        font-size: 8.7cqw;
+        font-style: italic;
+        font-weight: 400;
+        line-height: 1;
+      }
+
+      .location-title {
+        top: 14.4%;
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 5.35cqw;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .location-address {
+        top: 30.6%;
+        padding: 0 5%;
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 4.65cqw;
+        font-style: normal;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 1.56;
+        text-transform: uppercase;
+      }
+
+      .location-map-link {
+        position: absolute;
+        top: 70.4%;
+        left: 25%;
+        z-index: 4;
+        display: grid;
+        width: 50%;
+        min-height: 8.1%;
+        padding: 0.6em 1em;
+        place-items: center;
+        border: 1px solid rgba(238, 215, 220, 0.12);
+        border-radius: 0;
+        background: #713047;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+        color: #f8f2ed;
+        font-family: Didot, "Bodoni 72", "Bodoni MT", Georgia, serif;
+        font-size: 3.7cqw;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 1;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .location-map-link:focus-visible {
+        outline: 2px solid #f6e9dd;
+        outline-offset: 4px;
+      }
+
+      .music-toggle {
+        position: absolute;
+        top: max(14px, env(safe-area-inset-top));
+        right: max(14px, env(safe-area-inset-right));
+        z-index: 40;
+        display: grid;
+        width: 46px;
+        height: 46px;
+        padding: 0;
+        place-items: center;
+        border: 1px solid rgba(248, 238, 202, 0.62);
+        border-radius: 50%;
+        background: rgba(42, 43, 24, 0.76);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+        color: #f7edc9;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: scale(0.82);
+        transition:
+          opacity 420ms ease,
+          transform 420ms cubic-bezier(0.2, 0.85, 0.3, 1.18),
+          background-color 220ms ease;
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+      }
+
+      .scene.invitation-visible .music-toggle {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: scale(1);
+      }
+
+      .music-toggle:hover {
+        background: rgba(68, 68, 37, 0.9);
+      }
+
+      .music-toggle:focus-visible {
+        outline: 2px solid #fff7db;
+        outline-offset: 3px;
+      }
+
+      .music-icon {
+        display: block;
+        font-family: Georgia, serif;
+        font-size: 1.55rem;
+        line-height: 1;
+        transform-origin: 50% 60%;
+      }
+
+      .music-toggle.is-playing .music-icon {
+        animation: music-pulse 1.45s ease-in-out infinite;
+      }
+
+      .motion-ready .location-section.reveal {
+        opacity: 0;
+        clip-path: inset(8% 0 8% 0);
+        transform: scale(1.025);
+        transition:
+          opacity 1s ease,
+          clip-path 1.25s cubic-bezier(0.2, 0.76, 0.2, 1),
+          transform 1.3s cubic-bezier(0.2, 0.76, 0.2, 1);
+      }
+
+      .motion-ready .location-section.reveal.is-visible {
+        opacity: 1;
+        clip-path: inset(0);
+        transform: scale(1);
+      }
+
+      .motion-ready .location-section .location-script,
+      .motion-ready .location-section .location-title,
+      .motion-ready .location-section .location-address,
+      .motion-ready .location-section .location-map-link {
+        opacity: 0;
+      }
+
+      .location-section.is-visible .location-background {
+        animation: location-camera 13s ease-in-out infinite alternate;
+      }
+
+      .location-section.is-visible .location-script,
+      .location-section.is-visible .location-title,
+      .location-section.is-visible .location-address {
+        animation: location-copy-in 1s cubic-bezier(0.2, 0.76, 0.2, 1) both;
+      }
+
+      .location-section.is-visible .location-title {
         animation-delay: 120ms;
       }
 
-      .is-open .sparkles i:nth-child(3) {
-        animation-delay: 220ms;
+      .location-section.is-visible .location-address {
+        animation-delay: 280ms;
       }
 
-      .is-open .sparkles i:nth-child(4) {
-        animation-delay: 340ms;
+      .location-section.is-visible .location-map-link {
+        animation:
+          location-button-in 0.9s cubic-bezier(0.18, 0.85, 0.3, 1.12) 520ms both,
+          location-button-glow 3s ease-in-out 1.42s infinite;
       }
 
-      .is-open .hint {
-        opacity: 0.48;
-      }
-
-      @keyframes glint {
-        0%,
-        48% {
-          transform: translateX(0) rotate(18deg);
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(244, 222, 142, 0.34);
         }
 
         70%,
         100% {
-          transform: translateX(440%) rotate(18deg);
+          box-shadow: 0 0 0 15px rgba(244, 222, 142, 0);
         }
       }
 
-      @keyframes rise {
-        0% {
-          opacity: 0;
-          transform: translateY(20px) scale(0.3);
-        }
-
-        28% {
-          opacity: 1;
-        }
-
+      @keyframes music-pulse {
+        0%,
         100% {
-          opacity: 0;
-          transform: translateY(-86px) scale(1);
+          opacity: 0.8;
+          transform: scale(0.94) rotate(-4deg);
+        }
+
+        50% {
+          opacity: 1;
+          transform: scale(1.1) rotate(4deg);
         }
       }
 
-      @media (max-height: 690px) {
-        .envelope-button {
-          width: min(74vw, 330px);
+      @keyframes photo-breathe {
+        from {
+          transform: scale(1);
         }
 
-        .hint {
-          margin-top: 10px;
+        to {
+          transform: scale(1.035);
         }
+      }
+
+      @keyframes dot-jump {
+        0%,
+        14%,
+        58%,
+        100% {
+          transform: translate(-50%, 0) scale(1, 1);
+        }
+
+        20% {
+          transform: translate(-50%, 2px) scale(1.12, 0.84);
+        }
+
+        36% {
+          transform: translate(-50%, -17px) scale(0.96, 1.04);
+        }
+
+        50% {
+          transform: translate(-50%, 0) scale(1.08, 0.9);
+        }
+      }
+
+      @keyframes ornament-glow {
+        0%,
+        100% {
+          filter: grayscale(1) sepia(0.15) brightness(0.96);
+        }
+
+        50% {
+          filter: grayscale(1) sepia(0.2) brightness(1.08) drop-shadow(0 2px 5px rgba(153, 130, 88, 0.12));
+        }
+      }
+
+      @keyframes script-breathe {
+        0%,
+        100% {
+          color: rgba(101, 95, 82, 0.16);
+        }
+
+        50% {
+          color: rgba(101, 95, 82, 0.24);
+        }
+      }
+
+      @keyframes bird-hover {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) rotate(-1deg);
+        }
+
+        50% {
+          transform: translate3d(4px, -9px, 0) rotate(1.2deg);
+        }
+      }
+
+      @keyframes wingbeat {
+        from {
+          filter: blur(0.35px);
+          transform: rotate(-7deg) scaleY(0.68);
+        }
+
+        to {
+          filter: blur(0);
+          transform: rotate(5deg) scaleY(1.03);
+        }
+      }
+
+      @keyframes calendar-copy-in {
+        from {
+          opacity: 0;
+          filter: blur(3px);
+          transform: translateY(14px);
+        }
+
+        to {
+          opacity: 1;
+          filter: blur(0);
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes calendar-day-in {
+        from {
+          opacity: 0;
+          transform: translateY(10px) scale(0.9);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes marker-arrive {
+        from {
+          opacity: 0;
+          transform: rotate(-9deg) scale(0.58);
+        }
+
+        to {
+          opacity: 1;
+          transform: rotate(0) scale(1);
+        }
+      }
+
+      @keyframes marker-pulse {
+        0%,
+        100% {
+          opacity: 1;
+          filter: drop-shadow(0 2px 3px rgba(93, 5, 30, 0.08));
+          transform: rotate(-1deg) scale(1);
+        }
+
+        50% {
+          opacity: 1;
+          filter: drop-shadow(0 4px 8px rgba(93, 5, 30, 0.18));
+          transform: rotate(1.5deg) scale(1.055);
+        }
+      }
+
+      @keyframes location-camera {
+        from {
+          filter: brightness(0.9);
+          transform: scale(1.015);
+        }
+
+        to {
+          filter: brightness(1.04);
+          transform: scale(1.045);
+        }
+      }
+
+      @keyframes location-copy-in {
+        from {
+          opacity: 0;
+          filter: blur(4px);
+          transform: translateY(18px);
+        }
+
+        to {
+          opacity: 1;
+          filter: blur(0);
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes location-button-in {
+        from {
+          opacity: 0;
+          transform: translateY(18px) scale(0.9);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes location-button-glow {
+        0%,
+        100% {
+          opacity: 1;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+          transform: translateY(0);
+        }
+
+        50% {
+          opacity: 1;
+          box-shadow: 0 10px 30px rgba(113, 48, 71, 0.38);
+          transform: translateY(-3px);
+        }
+      }
+
+      @media (min-width: 700px) {
+        body {
+          display: grid;
+          min-height: 100vh;
+          place-items: center;
+          padding: 24px;
+          background:
+            radial-gradient(circle, #44442a 0%, #242417 48%, #11120a 100%);
+        }
+
+        .scene {
+          width: min(50vh, 560px);
+          height: min(92vh, 900px);
+          min-height: 560px;
+          border: 1px solid rgba(242, 238, 198, 0.2);
+          border-radius: 34px;
+          box-shadow: 0 35px 90px rgba(0, 0, 0, 0.62);
+        }
+
+        .paper-face {
+          border-radius: 33px 33px 12% 12%;
+        }
+
+        .opened-monogram {
+          font-size: 5rem;
+        }
+      }
+
+      @media (max-height: 650px) {
+        .seal {
+          top: 17%;
+          width: min(48vw, 280px);
+        }
+
+        .photo-window {
+          max-height: 79%;
+        }
+
       }
 
       @media (prefers-reduced-motion: reduce) {
         *,
         *::before,
         *::after {
-          scroll-behavior: auto !important;
           animation-duration: 1ms !important;
           animation-iteration-count: 1 !important;
           transition-duration: 1ms !important;
@@ -432,51 +1389,296 @@
     </style>
   </head>
   <body>
-    <main class="stage">
-      <section class="invitation" aria-label="Приглашение B и A">
-        <button class="envelope-button" type="button" aria-expanded="false" aria-label="Открыть конверт">
-          <span class="envelope">
-            <span class="letter" aria-hidden="true">
-              <span class="letter-text">
-                <span class="date">Save the date</span>
-                <h1>B&nbsp;&amp;&nbsp;A</h1>
-                <p>С любовью приглашаем разделить с нами этот день.</p>
-              </span>
+    <main class="scene">
+      <button class="envelope-trigger" type="button" aria-expanded="false" aria-label="Открыть приглашение">
+        <img class="envelope-base" src="assets/envelope-base-hd.png" alt="" aria-hidden="true" />
+
+        <span class="flap" aria-hidden="true">
+          <img class="flap-art" src="assets/envelope-flap-hd.png" alt="" />
+          <span class="monogram">
+            <span class="initial initial-b">B</span>
+            <span class="initial initial-a">A</span>
+          </span>
+        </span>
+      </button>
+
+      <section class="invitation-screen" aria-hidden="true" aria-label="Свадебное приглашение B и A">
+        <div class="visual-page">
+          <div class="photo-window">
+            <img class="couple-photo" src="assets/couple-invitation-hd.png" alt="Жених и невеста держатся за руки" />
+            <span class="opened-monogram" aria-label="B и A">
+              <span>B</span>
+              <span>A</span>
             </span>
-            <span class="pocket" aria-hidden="true"></span>
-            <span class="flap" aria-hidden="true">
-              <span class="flap-face">
-                <span class="seal">
-                  <span class="monogram">
-                    <span>B</span>
-                    <span>A</span>
-                  </span>
-                </span>
-                <span class="shine"></span>
-              </span>
-              <span class="flap-face back"></span>
-            </span>
-            <span class="sparkles" aria-hidden="true">
-              <i></i>
-              <i></i>
-              <i></i>
-              <i></i>
+            <span class="swipe-dot" aria-hidden="true"></span>
+            <span class="swipe-caption">жоғары жылжытыңыз</span>
+          </div>
+        </div>
+
+        <div class="details-content" aria-label="Текст свадебного приглашения">
+          <div class="details-flourish reveal" style="--reveal-delay: 0ms" aria-hidden="true">
+            <img src="assets/floral-ornament-transparent.png" alt="" />
+          </div>
+
+          <div class="details-heading reveal" style="--reveal-delay: 70ms">
+            <span class="details-heading-script">Құрметті қонақтар!</span>
+            <span class="details-heading-main">Құрметті қонақтар!</span>
+          </div>
+
+          <p class="details-audience reveal" style="--reveal-delay: 100ms">
+            Ағайын-туыс, бауырлар,<br />
+            құда-жекжат,<br />
+            нағашы-жиен, бөлелер,<br />
+            дос-жаран, көршілер мен<br />
+            әріптестер!
+          </p>
+
+          <p class="details-lead reveal" style="--reveal-delay: 60ms">Сіздерді</p>
+          <p class="couple-names reveal" style="--reveal-delay: 100ms">Бағлан мен Айгерімнің</p>
+
+          <p class="details-closing reveal" style="--reveal-delay: 80ms">
+            Үйлену тойына<br />
+            арналған ақ<br />
+            дастарханымыздың<br />
+            қадірлі қонағы болуға<br />
+            шақырамыз!
+          </p>
+
+        </div>
+
+        <figure class="hosts-section reveal" aria-label="Той иелері">
+          <img
+            class="hosts-background"
+            src="assets/hosts-scene-hd.png"
+            width="970"
+            height="1622"
+            alt="Свадебная табличка в окружении кружева и цветов"
+          />
+
+          <p class="hosts-script" aria-hidden="true">Той иелері</p>
+          <p class="hosts-title">Той иелері:</p>
+          <p class="hosts-names">Бахыт &amp; Нурила</p>
+
+          <span class="hummingbird hummingbird-left" aria-hidden="true">
+            <span class="bird-orient">
+              <img class="bird-body" src="assets/hummingbird-body.png" alt="" />
+              <img class="bird-wings" src="assets/hummingbird-wings.png" alt="" />
             </span>
           </span>
-        </button>
-        <p class="hint">Нажмите на конверт</p>
-      </section>
-    </main>
-    <script>
-      const button = document.querySelector(".envelope-button");
-      const hint = document.querySelector(".hint");
 
-      button.addEventListener("click", () => {
-        const isOpen = button.classList.toggle("is-open");
-        button.setAttribute("aria-expanded", String(isOpen));
-        button.setAttribute("aria-label", isOpen ? "Закрыть конверт" : "Открыть конверт");
-        hint.textContent = isOpen ? "Конверт открыт" : "Нажмите на конверт";
+          <span class="hummingbird hummingbird-right" aria-hidden="true">
+            <span class="bird-orient">
+              <img class="bird-body" src="assets/hummingbird-body.png" alt="" />
+              <img class="bird-wings" src="assets/hummingbird-wings.png" alt="" />
+            </span>
+          </span>
+        </figure>
+
+        <section class="calendar-section reveal" aria-label="Календарь свадебного торжества на 1 ноября 2026 года в 18:00">
+          <img
+            class="calendar-background"
+            src="assets/calendar-paper-hd.png"
+            width="1086"
+            height="1448"
+            alt=""
+            aria-hidden="true"
+          />
+
+          <p class="calendar-script" aria-hidden="true">Той салтанаты</p>
+          <h2 class="calendar-title">Той салтанаты</h2>
+          <p class="calendar-date">1-қараша 2026 жыл<span class="calendar-time">18:00</span></p>
+
+          <div class="calendar-weekdays" aria-hidden="true">
+            <span>ДС</span><span>СС</span><span>СР</span><span>БС</span><span>ЖМ</span><span>СН</span><span>ЖС</span>
+          </div>
+
+          <div class="calendar-grid" aria-label="Қараша 2026">
+            <span class="calendar-day" style="--day-index: 0" aria-hidden="true"></span>
+            <span class="calendar-day" style="--day-index: 1" aria-hidden="true"></span>
+            <span class="calendar-day" style="--day-index: 2" aria-hidden="true"></span>
+            <span class="calendar-day" style="--day-index: 3" aria-hidden="true"></span>
+            <span class="calendar-day" style="--day-index: 4" aria-hidden="true"></span>
+            <span class="calendar-day" style="--day-index: 5" aria-hidden="true"></span>
+            <time class="calendar-day is-event" style="--day-index: 6" datetime="2026-11-01T18:00">
+              <span>1</span>
+              <span class="event-marker" aria-hidden="true">
+                <img src="assets/calendar-heart-ribbon.png" alt="" />
+              </span>
+            </time>
+            <span class="calendar-day" style="--day-index: 7"><span>2</span></span>
+            <span class="calendar-day" style="--day-index: 8"><span>3</span></span>
+            <span class="calendar-day" style="--day-index: 9"><span>4</span></span>
+            <span class="calendar-day" style="--day-index: 10"><span>5</span></span>
+            <span class="calendar-day" style="--day-index: 11"><span>6</span></span>
+            <span class="calendar-day" style="--day-index: 12"><span>7</span></span>
+            <span class="calendar-day" style="--day-index: 13"><span>8</span></span>
+            <span class="calendar-day" style="--day-index: 14"><span>9</span></span>
+            <span class="calendar-day" style="--day-index: 15"><span>10</span></span>
+            <span class="calendar-day" style="--day-index: 16"><span>11</span></span>
+            <span class="calendar-day" style="--day-index: 17"><span>12</span></span>
+            <span class="calendar-day" style="--day-index: 18"><span>13</span></span>
+            <span class="calendar-day" style="--day-index: 19"><span>14</span></span>
+            <span class="calendar-day" style="--day-index: 20"><span>15</span></span>
+            <span class="calendar-day" style="--day-index: 21"><span>16</span></span>
+            <span class="calendar-day" style="--day-index: 22"><span>17</span></span>
+            <span class="calendar-day" style="--day-index: 23"><span>18</span></span>
+            <span class="calendar-day" style="--day-index: 24"><span>19</span></span>
+            <span class="calendar-day" style="--day-index: 25"><span>20</span></span>
+            <span class="calendar-day" style="--day-index: 26"><span>21</span></span>
+            <span class="calendar-day" style="--day-index: 27"><span>22</span></span>
+            <span class="calendar-day" style="--day-index: 28"><span>23</span></span>
+            <span class="calendar-day" style="--day-index: 29"><span>24</span></span>
+            <span class="calendar-day" style="--day-index: 30"><span>25</span></span>
+            <span class="calendar-day" style="--day-index: 31"><span>26</span></span>
+            <span class="calendar-day" style="--day-index: 32"><span>27</span></span>
+            <span class="calendar-day" style="--day-index: 33"><span>28</span></span>
+            <span class="calendar-day" style="--day-index: 34"><span>29</span></span>
+            <span class="calendar-day" style="--day-index: 35"><span>30</span></span>
+          </div>
+        </section>
+
+        <section class="location-section reveal" aria-label="Мекенжайымыз">
+          <img
+            class="location-background"
+            src="assets/location-curtains-hd.png"
+            width="1086"
+            height="1448"
+            alt="Тёмные бархатные шторы и свадебная цветочная композиция"
+          />
+
+          <p class="location-script" aria-hidden="true">Мекенжайымыз:</p>
+          <h2 class="location-title">Мекенжайымыз:</h2>
+
+          <address class="location-address">
+            Шымкент қаласы,<br />
+            Жібек жолы көшесі, 130/1<br />
+            &quot;Altyn Ballroom&quot;<br />
+            мейрамханасы
+          </address>
+
+          <a
+            class="location-map-link"
+            href="https://2gis.kz/shymkent/geo/70030077114379839"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Открыть Altyn Ballroom в 2GIS"
+          >2GIS-те ашу</a>
+        </section>
+      </section>
+
+      <button
+        class="music-toggle"
+        type="button"
+        aria-pressed="false"
+        aria-label="Включить музыку"
+        title="Включить музыку"
+      >
+        <span class="music-icon" aria-hidden="true">&#9835;</span>
+      </button>
+
+      <audio id="wedding-music" src="assets/wedding-song.mp3" preload="auto" loop></audio>
+    </main>
+
+    <script>
+      const trigger = document.querySelector(".envelope-trigger");
+      const scene = document.querySelector(".scene");
+      const invitation = document.querySelector(".invitation-screen");
+      const revealItems = document.querySelectorAll(".reveal");
+      const music = document.querySelector("#wedding-music");
+      const musicToggle = document.querySelector(".music-toggle");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let musicFadeFrame;
+
+      const updateMusicControl = () => {
+        const isPlaying = !music.paused;
+        const label = isPlaying ? "Выключить музыку" : "Включить музыку";
+
+        musicToggle.classList.toggle("is-playing", isPlaying);
+        musicToggle.setAttribute("aria-pressed", String(isPlaying));
+        musicToggle.setAttribute("aria-label", label);
+        musicToggle.title = label;
+      };
+
+      const fadeMusicIn = () => {
+        window.cancelAnimationFrame(musicFadeFrame);
+        music.volume = reduceMotion ? 0.55 : 0;
+
+        const playPromise = music.play();
+        const beginFade = () => {
+          updateMusicControl();
+          if (reduceMotion) return;
+
+          const startedAt = performance.now();
+          const fade = (now) => {
+            if (music.paused) return;
+
+            const progress = Math.min((now - startedAt) / 1200, 1);
+            music.volume = 0.55 * progress;
+            if (progress < 1) musicFadeFrame = window.requestAnimationFrame(fade);
+          };
+
+          musicFadeFrame = window.requestAnimationFrame(fade);
+        };
+
+        if (playPromise) {
+          playPromise.then(beginFade).catch(updateMusicControl);
+        } else {
+          beginFade();
+        }
+      };
+
+      if (!reduceMotion && "IntersectionObserver" in window) {
+        document.documentElement.classList.add("motion-ready");
+
+        const revealObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            });
+          },
+          {
+            root: invitation,
+            rootMargin: "0px 0px -8% 0px",
+            threshold: 0.12,
+          }
+        );
+
+        revealItems.forEach((item) => revealObserver.observe(item));
+      } else {
+        revealItems.forEach((item) => item.classList.add("is-visible"));
+      }
+
+      trigger.addEventListener("click", () => {
+        if (trigger.classList.contains("is-open")) return;
+
+        trigger.classList.add("is-open");
+        trigger.setAttribute("aria-expanded", "true");
+        trigger.setAttribute("aria-label", "Приглашение открыто");
+        fadeMusicIn();
+
+        window.setTimeout(() => {
+          scene.classList.add("invitation-visible");
+          invitation.setAttribute("aria-hidden", "false");
+          invitation.scrollTop = 0;
+        }, 1320);
       });
+
+      musicToggle.addEventListener("click", () => {
+        if (music.paused) {
+          fadeMusicIn();
+          return;
+        }
+
+        window.cancelAnimationFrame(musicFadeFrame);
+        music.pause();
+      });
+
+      music.addEventListener("play", updateMusicControl);
+      music.addEventListener("pause", updateMusicControl);
+
     </script>
   </body>
 </html>
